@@ -1,0 +1,18 @@
+#!/bin/bash
+
+mkdir -p ~/backups/freemem
+mkdir -p ~/backups/diskuse
+mkdir -p ~/backups/openlist
+mkdir -p ~/backups/freedisk
+
+free -h > ~/backups/freemem/free_mem.txt
+
+#df -h > ~/backups/diskuse/disk_usage.txt  #this is the simplest way to get a generic utilization and free available space. Therefore is could be use to answer diskuse and freedisk. 
+
+df -h | awk '{print $3 "\t" $6}' > ~/backups/diskuse/disk_usage.txt # An aleternative will be just to display the collums for utilization and the filesystems
+
+#du -sh / > ~/backups/diskuse/disk_usage.txt #Antoher alternative is to get the actual utilization from the root directory as a summary using the command "du" unfortunately, the question does not specify the requirements.
+
+lsof > ~/backups/openlist/open_list.txt
+
+df -h | awk '{print $4 "\t" $5 "\t" $6}' > ~/backups/freedisk/free_disk.txt.
