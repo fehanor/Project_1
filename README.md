@@ -79,8 +79,11 @@ A summary of the access policies in place can be found in the table below.
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because
 
 It can mitigate human errors by removing manual configuration. 
-it reduces the amount of work required to deploy large scale environments in a consistent way 
-Deployments can be easily replicated on demand 
+
+it reduces the amount of work required to deploy large scale environments in a consistent way.
+
+Deployments can be easily replicated on demand.
+
 Guarantee consistency across the environment. 
 
 The playbook implements the following tasks:
