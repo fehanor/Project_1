@@ -96,29 +96,85 @@ The playbook implements the following tasks:
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-![TODO: Update the path with the name of your screenshot of docker ps output](Images/docker_ps_output.png)
+<img src="https://github.com/fehanor/Project_1/blob/main/Ansible/Running%20ELK.png">
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
-- _TODO: List the IP addresses of the machines you are monitoring_
+
+| Name     | Function | IP Address |
+|----------|----------|------------|
+| Web-1 | Webserver | 10.1.0.5 |
+| Web-2 | Webserver | 10.1.0.6 |
 
 We have installed the following Beats on these machines:
-- _TODO: Specify which Beats you successfully installed_
+
+- Filebeat
+- Metricbeat
 
 These Beats allow us to collect the following information from each machine:
-- _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
+
+- Filebeat allow us to collect linux logs and focus on monitoring changes and events that could represent a risk for the host
+
+- Metricbeat is intended to monitor the performance of the target servers. This will report information such as CPU load, memory utilization and storage availability as an example.  
 
 ### Using the Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
-- Copy the _____ file to _____.
-- Update the _____ file to include...
-- Run the playbook, and navigate to ____ to check that the installation worked as expected.
+- Copy the ansible.cfg file to /etc/ansible.
+- Update the /etc/ansible/hosts file to include the list of target hosts <br />
+example:
+```
+[webservers]
+10.1.0.5 ansible_python_interpreter=/usr/bin/python3
+10.1.0.6 ansible_python_interpreter=/usr/bin/python3
+[elk]
+10.0.0.4 ansible_python_interpreter=/usr/bin/python3
+```  
+- Run the playbook, and navigate to ELK public IP address on port 5601 to check that the installation worked as expected.
 
-_TODO: Answer the following questions to fill in the blanks:_
-- _Which file is the playbook? Where do you copy it?_
-- _Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
-- _Which URL do you navigate to in order to check that the ELK server is running?
+```
+root@6ceb3e23dcca:/etc/ansible# ansible-playbook install-elk.yml
+root@6ceb3e23dcca:/etc/ansible# ansible-playbook filebeat-playbook.yml
+root@6ceb3e23dcca:/etc/ansible# ansible-playbook metricbeat-config.yml
+```
+<img src="https://github.com/fehanor/Project_1/blob/main/Ansible/Kibana.png">
 
-_As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
+
+
+Additional useful commands to connect to the docker container 
+
+List existing container 
+
+```
+azadmin@Jump-Box-Provisioner:~$ sudo docker container list -a
+CONTAINER ID   IMAGE                    COMMAND                  CREATED       STATUS                          PORTS     NAMES
+6ceb3e23dcca   cyberxsecurity/ansible   "/bin/sh -c /bin/bas…"   2 weeks ago   Exited (0) About a minute ago             kind_fermi
+```
+Verify running container 
+
+```
+azadmin@Jump-Box-Provisioner:~$ sudo docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+```
+
+Start your existing container
+
+```
+azadmin@Jump-Box-Provisioner:~$ sudo docker start kind_fermi
+kind_fermi
+```
+
+Confirm the docker container is running 
+
+```
+azadmin@Jump-Box-Provisioner:~$ sudo docker ps
+CONTAINER ID   IMAGE                    COMMAND                  CREATED       STATUS         PORTS     NAMES
+6ceb3e23dcca   cyberxsecurity/ansible   "/bin/sh -c /bin/bas…"   2 weeks ago   Up 2 seconds             kind_fermi
+```
+
+Connect to an existing dokcer container 
+
+```
+azadmin@Jump-Box-Provisioner:~$ sudo docker attach kind_fermi
+```
