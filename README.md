@@ -48,10 +48,10 @@ The configuration details of each machine may be found below.
 
 | Name     | Function | IP Address | Operating System |
 |----------|----------|------------|------------------|
-| Jump Box | Gateway  | 10.1.0.4   | Ubuntu 18.04.6 LTS            |
-| ELK-Sever     | Monitoring         | 10.0.0.4           | Ubuntu 18.04.6 LTS                |
-| Web-1     | Webserver         | 10.1.0.5           | Ubuntu 18.04.6 LTS                |
-| Web-2    | Webserver         | 10.1.0.6           | Ubuntu 18.04.6 LTS                 |
+| Jump Box | Gateway  | 10.1.0.4   | Ubuntu 18.04.6 LTS |
+| ELK-Sever | Monitoring | 10.0.0.4 | Ubuntu 18.04.6 LTS |
+| Web-1 | Webserver | 10.1.0.5 | Ubuntu 18.04.6 LTS |
+| Web-2 | Webserver | 10.1.0.6 | Ubuntu 18.04.6 LTS |
 
 ### Access Policies
 
@@ -87,9 +87,12 @@ Deployments can be easily replicated on demand.
 Guarantee consistency across the environment. 
 
 The playbook implements the following tasks:
-- _TODO: In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc._
-- ...
-- ...
+
+- Download and implement Docker and DVWA 
+- Download and implement ELK on exisiting docker containers. 
+- Download and implement and start filebeats and metricbeat on Webserver ansible group
+- The implementation of the above also includes configuration files and required ports for the proper
+
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
